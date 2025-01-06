@@ -1,13 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ATW-Around The World</title>
-</head>
+<% layout('layouts/boilerplate') -%>
 <body>
     <h3>All listings</h3>
-    <ul>
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-lg-1">
+        <% for(let i = 0; i < allListings.length; i++) { %>
+        <a href="/listings/<%= allListings[i]._id %>" class="listing-link">
+            <div class="card">
+                <img
+                    src="<%= allListings[i].image %>"
+                    class="card-img-top"
+                    alt="listing_image"
+                    style="height: 20rem"
+                />
+                <div class="card-img-overlay"></div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <b><%= allListings[i].title %></b>
+                        <br />
+                        &#8377;<%= allListings[i].price.toLocaleString('en-IN')
+                        %> / night
+                    </p>
+                </div>
+            </div>
+        </a>
+        <% } %>
+    </div>
+    <!-- <ul>
         <% for(let i = 0; i < allListings.length; i++) { %>
             <li>
                 <a href="/listings/<%= allListings[i]._id %>"> <%= allListings[i].title %> </a>
@@ -16,6 +33,5 @@
     </ul>
     <form action="listings/new">
         <button type="submit">Create New Listing</button>
-    </form>
+    </form> -->
 </body>
-</html>

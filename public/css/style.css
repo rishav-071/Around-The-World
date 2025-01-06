@@ -1,0 +1,114 @@
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.container{
+    flex: 1;
+}
+
+/* Nav-bar */
+.navbar{
+    background-color: white;
+    height: 5rem;
+}
+.fa-earth-americas{
+    color: #fe424d;
+}
+.nav-link{
+    color: #222222 !important;
+}
+
+/* Footer */
+.f-info{
+    height: 8rem;
+    color: #222222;
+    background-color: #ebebeb;
+    display: flex;
+    justify-content: center;
+    align-items: space-evenly;
+    flex-wrap: wrap;
+    text-align: center;
+}
+.f-info-social{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.f-info-social i{
+    color: #222222;
+    font-size: 1.2rem;
+    margin-left: 1rem;
+}
+.f-info-brand{
+    width: 100%;
+    margin-bottom: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.f-info-links{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.f-info-links a{
+    margin-left: 1rem;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: #222222;
+}
+.f-info-links a:hover{
+    text-decoration: underline;
+}
+
+/* Cards */
+.card{
+    border: none;
+    margin-bottom: 2rem;
+}
+.card-img-top{
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+.card-body{
+    padding: 0px !important;
+}
+.card-text{
+    font-weight: 400;
+}
+.listing-link{
+    text-decoration: none;
+}
+
+/* Card Effects */
+.card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    background-color: white;
+    opacity: 0.2;
+}
+
+/* New Page */
+.add-btn{
+    background-color: #fe424d !important;
+    border: none;
+}
+
+/* Edit Page */
+.edit-btn{
+    background-color: #fe424d !important;
+    border: none;
+}
+
+/* Show Page */
+.show-img{
+    height: 30vh;
+}
+.btns{
+    display: flex;
+}
