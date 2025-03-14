@@ -59,7 +59,7 @@
                     checked
                     aria-label="No rating."
                     />
-                    <input type="radio" id="first-rate1" name="rating" value="1" />
+                    <input type="radio" id="first-rate1" name="review[rating]" value="1" />
                     <label for="first-rate1" title="Terrible">1 star</label>
                     <input type="radio" id="first-rate2" name="review[rating]" value="2" />
                     <label for="first-rate2" title="Not good">2 stars</label>
@@ -95,7 +95,7 @@
             <div class="card mb-3 col-5 ms-3">
                 <div class="card-body">
                     <h5 class="card-title">@<%= review.author.username %></h5>
-                    <p class="starability-result card-text" data-rating="3"><%= review.rating %></p>
+                    <p class="starability-result card-text" data-rating="<%= review.rating %>"><%= review.rating %></p>
                     <p class="card-text"><%= review.comment %></p>
                 </div>
                 <% if(currUser && currUser._id.equals(review.author._id)){ %>
