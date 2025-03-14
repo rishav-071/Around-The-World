@@ -9,13 +9,8 @@ const listingSchema = new Schema({
     },
     description: String,
     image: {
-        type: String,
-        default:
-            "https://cdn.pixabay.com/photo/2024/12/26/21/02/firenze-9292729_1280.jpg",
-        set: (url) =>
-            url === ""
-                ? "https://cdn.pixabay.com/photo/2024/12/26/21/02/firenze-9292729_1280.jpg"
-                : url,
+        url: String,
+        filename: String,
     },
     price: {
         type: Number,
@@ -32,18 +27,18 @@ const listingSchema = new Schema({
     reviews: [
         {
             type: Schema.Types.ObjectId,
-            ref: "Review"
-        }
+            ref: "Review",
+        },
     ],
     owner: {
-            type: Schema.Types.ObjectId,
-            ref: "User"
+        type: Schema.Types.ObjectId,
+        ref: "User",
     },
 });
 
 listingSchema.post("findOneAndDelete", async (listing) => {
-    if(listing){
-        await Review.deleteMany({_id: {$in: listing.reviews}});
+    if (listing) {
+        await Review.deleteMany({ _id: { $in: listing.reviews } });
     }
 });
 
