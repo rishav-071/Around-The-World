@@ -2,7 +2,13 @@
 <div class="row mt-3">
     <div class="col-8 offset-2">
         <h3>Edit Listing:</h3>
-        <form method="POST" action="/listings/<%= listing._id %>?_method=PATCH" novalidate class="needs-validation" >
+        <form
+            method="POST"
+            action="/listings/<%= listing._id %>?_method=PATCH"
+            novalidate
+            class="needs-validation"
+            enctype="multipart/form-data"
+        >
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
                 <input
@@ -20,19 +26,24 @@
                     name="listing[description]"
                     class="form-control"
                     required
-                ><%= listing.description %></textarea>
+                ><%= listing.description %>
+                </textarea
+                >
                 <div class="invalid-feedback">Enter a Description</div>
             </div>
             <div class="mb-3">
-                <label for="image" class="form-label">Image Link</label>
+                <label for="image" class="form-label">Upload new Image</label>
                 <input
-                    type="url"
+                    type="file"
                     name="listing[image]"
-                    value="<%= listing.image %>"
                     class="form-control"
-                    required
                 />
                 <div class="invalid-feedback">Enter a valid Image Link</div>
+            </div>
+            <div class="mb-3">
+                original image:
+                <br>
+                <img src="<%= listing.image.url %>" alt="" height="400px" >
             </div>
             <div class="row">
                 <div class="mb-3 col-4">
@@ -69,8 +80,10 @@
                 />
                 <div class="invalid-feedback">Enter a valid Location</div>
             </div>
-            <button type="submit" class="btn btn-dark edit-btn mt-3">Edit Listing</button>
-            <br><br>
+            <button type="submit" class="btn btn-dark edit-btn mt-3">
+                Edit Listing
+            </button>
+            <br /><br />
         </form>
     </div>
 </div>

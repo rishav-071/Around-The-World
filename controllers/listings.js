@@ -40,13 +40,20 @@ module.exports.renderEditForm = async (req, res) => {
         req.flash("error", "Cannot find that listing!");
         return res.redirect("/listings");
     }
+    listing.image.url = listing.image.url.replace("upload", "upload/w_250");
     res.render("listings/edit.ejs", { listing });
 };
 
 module.exports.updateListing = async (req, res) => {
     let { id } = req.params;
     let listing = req.body.listing;
-    await Listing.findByIdAndUpdate(id, listing);
+    listing=await Listing.findByIdAndUpdate(id, listing);
+    if(typeof req.file !== "undefined"){
+        let url = req.file.path;
+        let filename = req.file.filename;
+        listing.image = { url, filename };
+        await listing.save();
+    }
     req.flash("success", "Listing updated successfully!");
     res.redirect(`/listings/${id}`);
 };

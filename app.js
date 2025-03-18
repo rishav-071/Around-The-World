@@ -51,10 +51,6 @@ main()
     })
     .catch((err) => console.log(err));
 
-app.get("/", (req, res) => {
-    res.send("Hello World");
-});
-
 app.use(session(sessionOptions));
 app.use(flash());
 
@@ -69,12 +65,6 @@ app.use((req, res, next) => {
     res.locals.error = req.flash("error");
     res.locals.currUser = req.user;
     next();
-});
-
-app.get("/demouser", async (req, res) => {
-    const user = new User({ email: "damo@gmail.com", username: "damo" });
-    const newUser = await User.register(user, "password");
-    res.send(newUser);
 });
 
 app.use("/listings", listingRouter);

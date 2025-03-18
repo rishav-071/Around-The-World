@@ -14,27 +14,28 @@ router
     .get(wrapAsync(listingController.index))
     .post(
         isLoggedIn,
-        validateListing,
         upload.single('listing[image]'),
+        validateListing,
         wrapAsync(listingController.createListing)
     );
-
-//New Route
-router.get("/new", isLoggedIn, listingController.renderNewForm);
-
-router
+    
+    //New Route
+    router.get("/new", isLoggedIn, listingController.renderNewForm);
+    
+    router
     .route("/:id")
     .get(wrapAsync(listingController.showListing))
     .patch(
         isLoggedIn,
         isOwner,
+        upload.single('listing[image]'),
         validateListing,
         wrapAsync(listingController.updateListing)
     )
     .delete(isLoggedIn, isOwner, wrapAsync(listingController.destroyListing));
-
-//Edit Route
-router.get(
+    
+    //Edit Route
+    router.get(
     "/:id/edit",
     isLoggedIn,
     isOwner,
