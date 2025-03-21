@@ -1,5 +1,7 @@
 const { models } = require("mongoose");
 const Listing = require("../models/listing");
+const axios = require("axios");
+const ExpressError = require("../utils/ExpressError");
 
 module.exports.index = async (req, res) => {
     let allListings = await Listing.find();
@@ -28,6 +30,10 @@ module.exports.createListing = async (req, res) => {
     let listing = new Listing(req.body.listing);
     listing.owner = req.user._id;
     listing.image = { url, filename };
+    let fetchUrl = `https://api.olamaps.io/places/v1/geocode?address=${listing.location}&language=English&api_key=${process.env.MAP_API_KEY}`;
+    let data = await axios.get(fetchUrl);
+    let { lng, lat } = data.data.geocodingResults[0].geometry.location;
+    listing.geometry = { type: "Point", coordinates: [lng, lat] };
     let result = await listing.save();
     req.flash("success", "Successfully added a new listing!");
     res.redirect("/listings");
@@ -47,8 +53,8 @@ module.exports.renderEditForm = async (req, res) => {
 module.exports.updateListing = async (req, res) => {
     let { id } = req.params;
     let listing = req.body.listing;
-    listing=await Listing.findByIdAndUpdate(id, listing);
-    if(typeof req.file !== "undefined"){
+    listing = await Listing.findByIdAndUpdate(id, listing);
+    if (typeof req.file !== "undefined") {
         let url = req.file.path;
         let filename = req.file.filename;
         listing.image = { url, filename };
